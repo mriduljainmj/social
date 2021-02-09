@@ -36,10 +36,35 @@ function App() {
   const [ModalStyle] = useState(getModalStyle);
   const [posts,setposts] = useState([]);
   const [open,setOpen] = useState(false)
-  const [username,setUsername] = useState([]);
-  const [email,setEmail] = useState([]);
-  const [password,setPassword] = useState([]);
-  
+  const [username,setUsername] = useState();
+  const [email,setEmail] = useState();
+  const [password,setPassword] = useState();
+  const [user,setUser] = useState(null);
+
+  useEffect(()=>{
+    const unsubscribe = auth.onAuthStateChanged((authUser)=> {
+      if(authUser){
+        console.log(authUser);
+        setUser(authUser);
+        
+        if(authUser.displayName){
+
+        }
+        else{
+          return authUser.updateProfile({
+            displayName :username
+          })
+        }
+      }
+      else{
+          setUser(null)
+      }
+    })
+    return () =>{
+      unsubscribe();
+    }
+
+  },[user,username]);
 
   useEffect(() =>{
     db.collection('posts').onSnapshot(snapshot=>{
@@ -61,6 +86,9 @@ const premain = (event) =>{
 
 const register = (e) =>{
   e.preventDefault();
+
+  auth.createUserWithEmailAndPassword(email,password)
+  .catch((error)=> alert(error.message))  
   
 }
 
