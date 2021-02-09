@@ -1,24 +1,40 @@
-import logo from './logo.svg';
 import './App.css';
+import React,{useState,useEffect} from 'react'; 
+import Post from './Post';
+import db  from './firebase';
+import firebase from 'firebase'
 
 function App() {
+  const [posts,setposts] = useState([]);
+
+  useEffect(() =>{
+    db.collection('posts').onSnapshot(snapshot=>{
+      setposts(snapshot.docs.map(doc =>({
+        id:doc.id,
+        post: doc.data()} )));
+    })
+  },[]);
+
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className = "App">
+     <div className ="app__header">
+       <img className ="app__img" src = "https://seeklogo.net/wp-content/uploads/2013/04/michael-jackson-mj-vector-logo-400x400.png" alt=" logo" />
+       <h4>MSoCiAL</h4>
+       
+   </div>
+
+    {
+        posts.map(({id,post}) =>(
+          <Post key = {id} username ={post.username} caption = {post.caption} imageurl = {post.imageurl} />
+        ) )
+    }
+
+  
     </div>
+
   );
 }
 
