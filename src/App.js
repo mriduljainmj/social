@@ -21,7 +21,6 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
-    
     width: 500,
     backgroundColor: theme.palette.background.paper,
     border: '3px dashed lightgray',
@@ -40,6 +39,7 @@ function App() {
   const [email,setEmail] = useState();
   const [password,setPassword] = useState();
   const [user,setUser] = useState(null);
+  const [signin,Setsignin] = useState(false);
 
   useEffect(()=>{
     const unsubscribe = auth.onAuthStateChanged((authUser)=> {
@@ -92,6 +92,12 @@ const register = (e) =>{
   
 }
 
+const login = (e)=>{
+  e.preventDefault();
+  auth.signInWithEmailAndPassword(email,password)
+  .catch((e)=> alert(e.message))
+}
+
 
   return (
     <div className = "App">
@@ -126,11 +132,53 @@ const register = (e) =>{
           </form>
         </div>
       </Modal>
+
+      <Modal
+        open={signin}
+        onClose={()=> Setsignin(false)}
+    
+      >
+        <div style ={ModalStyle} className={classes.paper}>
+          <form className = "app__register">
+          <center>
+        <img className ="app__img" src = "https://seeklogo.net/wp-content/uploads/2013/04/michael-jackson-mj-vector-logo-400x400.png" alt=" logo" />
+       </center>
+
+    
+       <Input placeholder="Email"
+              type="email"
+              value ={email}
+              onChange={eremain}/>     
+    
+
+        <Input placeholder="Password"
+              type="password"
+              value ={password}
+              onChange={premain}/> 
+              <br/>
+              
+          <Button type="submit" onClick ={login}>Login</Button>
+         
+          </form>
+        </div>
+      </Modal>
+
      <div className ="app__header">
        <img className ="app__img" src = "https://seeklogo.net/wp-content/uploads/2013/04/michael-jackson-mj-vector-logo-400x400.png" alt=" logo" />
        <h4>MSoCiAL</h4>
-      
-        <Button onClick={()=>setOpen(true)}>Register </Button>
+      {user ?
+        (
+        <Button onClick={()=>auth.signOut()}>Logout</Button>
+        )
+        :
+        (
+        <div>
+          <Button onClick={()=>setOpen(true)}>Register </Button>
+          <Button onClick={()=>Setsignin(true)}>Log{" "}In </Button>
+          </div>
+        )
+        
+      }
    </div>
 
     {
