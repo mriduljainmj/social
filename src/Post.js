@@ -56,7 +56,7 @@ function Post({username,caption,imageurl,postId,user}) {
                     <p><strong>{comment.username}</strong> {comment.text}</p>
                 ))}
                 </div>
-                
+            {user && (
             <div class ="post__box">
             <form>
             <input class="post__comment" type="text" placeholder="comment.." value={comment} onChange = {(e)=>setComment(e.target.value)}/>
@@ -65,6 +65,7 @@ function Post({username,caption,imageurl,postId,user}) {
             </button>
             </form>
             </div>
+            )}
         </div>
     )
 }
