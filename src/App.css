@@ -8,12 +8,15 @@ body{
   background-color: black;
 }
 
+.app__register{
+  display: flex;
+  flex-direction: column ;
+}
+
 .app__header{
   padding:15px;
   background-color: lightgray;
   border-bottom:1px solid black; 
-  display: flex;
-  align-items: center;
   margin-bottom: 10px;
 }
 
@@ -23,7 +26,15 @@ body{
 
 }
 
-.app__register{
+.app__sign{
   display: flex;
-  flex-direction: column ;
+  float: right;
+  justify-content: center;
 }
+
+.app__logo{
+  display: inline-flex;
+  align-items: center;
+  
+}
+

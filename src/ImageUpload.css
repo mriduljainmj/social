@@ -27,3 +27,22 @@
 .img__file{
     flex:10%;
 }
+/* .hide{
+    visibility: hidden;
+} */
+
+/* .dropdown_menu-6{
+  animation: growDown 300ms ease-in-out forwards;
+}
+  .dropdown_menu{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    perspective: 1000px;
+    display: none;
+  }
+  .dropdown:hover .dropdown_menu--animated{
+    display: block;
+  }
+   */

@@ -21,19 +21,19 @@ function ImageUpload() {
 
     return (
 
+        <div class="hide">
         <div class ="imageupload__header">
             <div class = "cap">
         {/* input for caption */}
         <input class ="img__caption" type ="text" placeholder="Caption" onChange={(e)=>setCaption(e.target.value)} value = {caption}/>
         {/* choose file */}
-        <input class="img__file" type ="file" onChange = {handleChange} /><br/>
+        <input class ="img__file" type ="file" onChange = {handleChange} /><br/>
         {/* upload button */}
         </div>
-        <button onClick="handleUpload">
+        <button onClick={handleUpload}>
             Upload
         </button>
-
-            
+        </div>
         </div>
     )
 }

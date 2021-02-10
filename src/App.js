@@ -165,8 +165,12 @@ const login = (e)=>{
       </Modal>
 
      <div className ="app__header">
+        <span className="app__logo">
        <img className ="app__img" src = "https://seeklogo.net/wp-content/uploads/2013/04/michael-jackson-mj-vector-logo-400x400.png" alt=" logo" />
        <h4>MSoCiAL</h4>
+       </span>
+      <div className ="app__sign">
+        
       {user ?
         (
         <Button onClick={()=>auth.signOut()}>Logout</Button>
@@ -180,6 +184,7 @@ const login = (e)=>{
         )
         
       }
+      </div>
    </div>
 
       <ImageUpload/>
