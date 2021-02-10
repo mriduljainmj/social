@@ -23,6 +23,18 @@ align-items: center;
     
 }
 
+.post__box{
+    display:flex;
+    margin-top:10px;
+}
 .post__text{
-    padding:20px
+    padding:20px;
+}
+
+.post__comment{
+    flex:1;
+}
+
+.post__button{
+    flex:0;
 }

@@ -194,13 +194,13 @@ const login = (e)=>{
           <h3 class ="app__before">Login to Upload.</h3>
       )
 }
-
+  <div className ="app__posts">
     {
         posts.map(({id,post}) =>(
-          <Post key = {id} username ={post.username} caption = {post.caption} imageurl = {post.imageurl} />
+          <Post key = {id} postId={id} user={user} username ={post.username} caption = {post.caption} imageurl = {post.imageurl} />
         ) )
     }
-
+</div>
   
     </div>
 
