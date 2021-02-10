@@ -1,0 +1,29 @@
+.imageupload__header{
+    background-color: gray;
+    text-align: center;
+    object-fit: contain;
+    border-radius: 50px;
+    margin:10px;
+    padding-bottom: 20px;
+    padding-top:20px;
+}
+
+.cap{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 15%;
+    margin-right: 15%;
+    align-items: center;
+    margin-bottom: 10px;
+    
+}
+
+.img__caption{
+    flex:20%;
+    padding-bottom:20px ;
+    margin-right: 10px;
+}
+
+.img__file{
+    flex:10%;
+}

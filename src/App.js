@@ -6,6 +6,7 @@ import firebase from 'firebase'
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { Button, Input } from '@material-ui/core';
+import ImageUpload from './ImageUpload';
 
 function getModalStyle() {
   const top = 50  
@@ -180,6 +181,8 @@ const login = (e)=>{
         
       }
    </div>
+
+      <ImageUpload/>
 
     {
         posts.map(({id,post}) =>(
