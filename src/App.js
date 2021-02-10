@@ -187,7 +187,13 @@ const login = (e)=>{
       </div>
    </div>
 
-      <ImageUpload/>
+      {user?.displayName ? (
+    
+      <ImageUpload username ={user.displayName}/>
+      ):(
+          <h3 class ="app__before">Login to Upload.</h3>
+      )
+}
 
     {
         posts.map(({id,post}) =>(

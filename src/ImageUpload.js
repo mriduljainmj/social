@@ -1,8 +1,10 @@
 import { Button } from '@material-ui/core';
 import React,{useState} from 'react'
+import { storage,db } from './firebase';
 import './ImageUpload.css';
+import firebase from 'firebase'
 
-function ImageUpload() {
+function ImageUpload({username}) {
     
     const [image,setImage] = useState(null);
     const [progress,setProgress] = useState(0);
@@ -15,8 +17,41 @@ function ImageUpload() {
     }
 
     const handleUpload =  () => {
+        const uploadTask = storage.ref(`images/${image.name}`).put(image);
+        
+        uploadTask.on(              //progress bar
+            "state_changed",
+            (snapshot) =>{
+                const progress = Math.round(
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                );
+                setProgress(progress);
 
+            },
+            (error) =>{
+                console.log(error);
+                alert(error.message);
+            },
 
+            () =>{
+                    storage
+                    .ref("images")
+                    .child(image.name)
+                    .getDownloadURL()
+                    .then(url => {
+                        db.collection("posts").add({
+                            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                            caption:caption,
+                            imageurl:url,
+                            username:username
+
+                        });
+                        setProgress(0);
+                        setCaption("");
+                        setImage(null);
+                    });
+            }
+        )
     }
 
     return (
@@ -29,10 +64,11 @@ function ImageUpload() {
         {/* choose file */}
         <input class ="img__file" type ="file" onChange = {handleChange} /><br/>
         {/* upload button */}
+        <progress value={progress} max="100"/>
         </div>
-        <button onClick={handleUpload}>
+        <Button onClick={handleUpload} >
             Upload
-        </button>
+        </Button>
         </div>
         </div>
     )
